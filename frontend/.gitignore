@@ -12,6 +12,8 @@ node_modules/
 .DS_Store
 .vercel
 
+!vercel.json
+
 firebase-credentials.json
 google-credentials.json
 
