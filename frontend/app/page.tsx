@@ -187,7 +187,9 @@ export default function Page() {
     formData.append("file", resizedFile);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/analyse-receipt", {
+      // This tells the app: Use the Vercel URL if it exists, otherwise use localhost
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+      const response = await fetch(`${apiUrl}/analyse-receipt`, {
         method: "POST",
         body: formData,
       });
