@@ -20,7 +20,7 @@
 >
 > 🚀 **Live Prototype:** [Click here to test MedScan!](https://kitahack-prototype.vercel.app/?_vercel_share=7ooFPwTJy2PsZTODWJWtkHDEHsjYiAeL)
 > 
-> 🎥 **Demo Video:** [Insert YouTube Link Here]
+> 🎥 **Demo Video:** [Watch the MedScan Demo Here](https://drive.google.com/file/d/1N7SQtvYMs62C-OS0F1ZISEKvetO_lBNn/view?usp=sharing)
 
 ## 🚨 The Problem: A Free-Market Failure in Healthcare
 
@@ -146,3 +146,68 @@ source venv/bin/activate
 
 # 4. Install the required Python packages
 pip install -r requirements.txt
+```
+
+### Step 2: Configure Backend Environment Variables
+1. Duplicate the `.env.example` file and rename it to `.env`.
+2. Open the `.env` file and add your credentials:
+```env
+# Google Gemini API Key (Get this from Google AI Studio)
+GOOGLE_API_KEY="your_api_key_here"
+
+# Google Maps / Places API Key (Needed for server-side Distance Matrix math)
+GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+
+# Firebase Admin SDK JSON string
+FIREBASE_SERVICE_ACCOUNT_JSON="your_firebase_json_string_here"
+```
+
+### Step 3: Run the FastAPI Backend
+Start the backend server:
+```bash
+uvicorn api:app --reload
+```
+
+### Step 4: Frontend Setup (Next.js)
+Open a new terminal window (leave the backend running) to set up the Next.js client.
+```bash
+# 1. Navigate to the frontend directory
+cd frontend
+
+# 2. Install Node modules 
+npm install --legacy-peer-deps
+```
+
+### Step 5: Configure Frontend Environment Variables
+1. Inside the `frontend` folder, create a file named `.env.local`.
+2. Add your Firebase Client credentials, Maps Key, and API URL:
+```env
+# Point to the local Python server
+NEXT_PUBLIC_API_URL="[http://127.0.0.1:8000](http://127.0.0.1:8000)"
+
+# Google Maps API Key (For the client-side map rendering)
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+
+# Firebase Client Config
+NEXT_PUBLIC_FIREBASE_API_KEY="your_api_key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your_project.firebaseapp.com"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="your_project_id"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your_project.appspot.com"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your_sender_id"
+NEXT_PUBLIC_FIREBASE_APP_ID="your_app_id"
+```
+
+### Step 6: Run the Frontend Development Server
+```bash
+npm run dev
+```
+
+### 🎉 You're Live!
+Open your browser and navigate to `http://localhost:3000`. 
+
+---
+
+🤝 **Contributing & License**
+This project was built specifically for the Google Developer Group KitaHack 2026. At this time, it is a closed-source prototype for hackathon judging purposes. If you are an insurance provider, healthcare regulator, or open-source contributor interested in the B2B API development of MedScan, please reach out to Team W Gaming via our Devpost submission.
+
+
