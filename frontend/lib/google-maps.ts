@@ -13,12 +13,14 @@ export interface PharmacyResult {
 }
 
 export async function findNearbyPharmacies(
-  lat: number, 
-  lng: number, 
+  lat: number,
+  lng: number,
   hospitalPrice: number
 ): Promise<PharmacyResult[]> {
-  
-  const url = `http://127.0.0.1:8000/pharmacies?lat=${lat}&lng=${lng}`;
+
+  // Use the Vercel environment variable, but fallback to localhost if you are testing on your laptop
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  const url = `${apiUrl}/pharmacies?lat=${lat}&lng=${lng}`;
 
   try {
     const response = await fetch(url, { method: "GET" });
@@ -27,10 +29,10 @@ export async function findNearbyPharmacies(
 
     return places.map((place: any) => {
       // Dynamic Pricing Logic
-      const variance = (Math.random() * 0.2) - 0.1; 
-      const discount = 0.6 + variance; 
+      const variance = (Math.random() * 0.2) - 0.1;
+      const discount = 0.6 + variance;
       const estimatedPrice = hospitalPrice * discount;
-      
+
       return {
         ...place,
         price: estimatedPrice,
@@ -43,6 +45,6 @@ export async function findNearbyPharmacies(
 
   } catch (error) {
     console.error("Backend Error:", error);
-    return []; 
+    return [];
   }
 }
