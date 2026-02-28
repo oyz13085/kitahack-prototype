@@ -1,10 +1,14 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Initialize Firebase using YOUR FRIEND'S key
 # Make sure the filename matches what you saved it as!
-firebase_cred = credentials.Certificate("firebase-credentials.json")
+firebase_cred = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
 
 # Prevent crashing if the app reloads during development
 if not firebase_admin._apps:
@@ -13,10 +17,6 @@ if not firebase_admin._apps:
 # Connect to your friend's Database
 db = firestore.client()
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 from google import genai
 from google.genai.types import HttpOptions, Part
 from google.genai import types
@@ -24,7 +24,6 @@ from PIL import Image
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 import json
-import os
 import shutil
 import requests
 
