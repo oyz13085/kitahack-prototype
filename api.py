@@ -43,7 +43,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 #from audit_logic import load_csv_db, compare_receipt_with_db
 from audit_logic import compare_receipt_with_db
 
-client = genai.Client(http_options=HttpOptions(api_version="v1"))
+client = genai.Client(http_options=HttpOptions(api_version="v1beta"))
 app = FastAPI()
 
 # Enable CORS (Allows your frontend at localhost:3000 to talk to this)
