@@ -78,23 +78,26 @@ async def analyse_receipt(file: UploadFile = File(...)):
                 """
                 You are an expert medical billing assistant operating in Malaysia. 
                 Extract data from this medical receipt.
-                Identify the hospital name, date, and a list of all line items.
                 
                 CRITICAL TRANSLATION RULE:
                 Hospitals use messy abbreviations. If an item is a medicine, you MUST translate its name into its standard, full, lowercase brand or generic name so it perfectly matches our database. 
                 Use these exact mappings as a guide for formatting:
                 - "AUG 625" -> "augmentin 625mg tablet"
                 - "PNDL ACTI" -> "panadol actifast"
-                - "LIP 20" -> "lipitor 20mg"
-                - "GAVISCON DA" -> "gaviscon double action"
-
-                For each item, identify:
-                - Item Name (This MUST be the translated clean name)
-                - The Quantity of the Item
-                - Price (Numeric only)
-                - Category (Classify as one of: "Medicine", "Consultation", "Lab Test", "Service")
                 
-                Return the result as a valid JSON object.
+                Return the result as a valid JSON object using EXACTLY this format and these keys:
+                {
+                    "hospital_name": "Extracted Name Here",
+                    "date": "Extracted Date Here",
+                    "items": [
+                        {
+                            "item_name": "translated name here",
+                            "quantity": 1,
+                            "price": 10.50,
+                            "category": "Medicine"
+                        }
+                    ]
+                }
                 """,
                 image
             ],
@@ -103,9 +106,8 @@ async def analyse_receipt(file: UploadFile = File(...)):
             )
         )
 
-        # Clean response
-        clean_text = response.text.strip()
-        if clean_text.startswith("```json"): clean_text = clean_text[7:-3]
+        # 🧹 SAFELY Clean response (Handles newlines without slicing off brackets)
+        clean_text = response.text.replace("```json", "").replace("```", "").strip()
         receipt_data = json.loads(clean_text)
 
         # 3. RUN AUDIT LOGIC (Imported from audit_logic.py)
