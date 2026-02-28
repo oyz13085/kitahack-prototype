@@ -148,4 +148,76 @@ source venv/bin/activate
 
 # 4. Install the required Python packages
 pip install -r requirements.txt
+```
 
+### Step 2: Configure Backend Environment Variables
+MedScan requires a few API keys to function locally. 
+
+```bash
+1. In the `backend` folder, duplicate the `.env.example` file and rename it to `.env`.
+2. Open the `.env` file and add your credentials:
+   ```env
+   # Google Gemini API Key (Get this from Google AI Studio)
+   GEMINI_API_KEY="your_gemini_api_key_here"
+
+   # Google Maps / Places API Key (Needed for server-side Distance Matrix math)
+   GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+   
+   # Firebase Admin SDK path (Optional: if you are running the live database sync locally)
+   FIREBASE_CREDENTIALS_PATH="./path-to-your-firebase-adminsdk.json"
+```
+
+### Step 3: Run the FastAPI Backend
+With your virtual environment active and your .env configured, start the backend server:
+
+```bash
+# Start the FastAPI server using Uvicorn
+python uvicorn api:app --reload
+```
+
+### Step 4: Frontend Setup (Next.js)
+Now, open a new terminal window (leave the backend running in the first one) to set up the Next.js client.
+
+```bash
+# 1. Navigate to the frontend directory
+cd frontend
+
+# 2. Install Node modules (we use --legacy-peer-deps for Firebase Admin compatibility)
+npm install --legacy-peer-deps
+```
+
+### Step 5: Configure Frontend Environment Variables
+Just like the backend, the frontend needs to know how to connect to your Firebase project and Google Maps.
+
+1. Inside the frontend folder, create a file named .env.local.
+2. Add your Firebase Client credentials and Google Maps API key:
+
+```bash
+# Google Maps API Key (For the client-side map rendering)
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+
+# Firebase Client Config
+NEXT_PUBLIC_FIREBASE_API_KEY="your_api_key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your_project.firebaseapp.com"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="your_project_id"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your_project.appspot.com"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your_sender_id"
+NEXT_PUBLIC_FIREBASE_APP_ID="your_app_id"
+```
+
+### Step 6: Run the Frontend Development Server
+Finally, boot up the Next.js application:
+
+```bash
+npm run dev
+```
+
+### 🎉 You're Live!
+Open your browser and navigate to http://localhost:3000. You should see the MedScan landing page. Try uploading a sample receipt to watch the local Next.js frontend communicate with your local Python FastAPI backend
+
+---
+
+🤝 Contributing & License
+This project was built specifically for the Google Developer Group KitaHack 2026. At this time, it is a closed-source prototype for hackathon judging purposes.
+
+If you are an insurance provider, healthcare regulator, or open-source contributor interested in the B2B API development of MedScan, please reach out to Team W Gaming via our Devpost submission.
