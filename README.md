@@ -148,4 +148,21 @@ source venv/bin/activate
 
 # 4. Install the required Python packages
 pip install -r requirements.txt
+```
+
+### Step 2: Configure Backend Environment Variables
+MedScan requires a few API keys to function locally. 
+
+```bash
+1. In the `backend` folder, duplicate the `.env.example` file and rename it to `.env`.
+2. Open the `.env` file and add your credentials:
+   ```env
+   # Google Gemini API Key (Get this from Google AI Studio)
+   GEMINI_API_KEY="your_gemini_api_key_here"
+
+   # Google Maps / Places API Key (Needed for server-side Distance Matrix math)
+   GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+   
+   # Firebase Admin SDK path (Optional: if you are running the live database sync locally)
+   FIREBASE_CREDENTIALS_PATH="./path-to-your-firebase-adminsdk.json"
 
