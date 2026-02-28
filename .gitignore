@@ -1,0 +1,46 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# IDE Settings
+.vscode/
+.idea/
+
+# Backend / Python extra
+*.log
+instance/
+.pytest_cache/
+
+# Frontend / Next.js extra
+.vercel
+build/
+dist/
+
+# Security (More explicit)
+# This catches any JSON files in the root or subfolders that aren't config
+**/*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!next.config.json
+
+# Environment Variables
+.env
+.env.local
+
+# Dependency folders
+node_modules/
+**/node_modules/
+backend/venv/
+
+# Build outputs
+.next/
+dist/
+build/
+
+.history/
+
+__pycache__/
+**/__pycache__/
+*.pyc
+venv/
