@@ -57,6 +57,10 @@ app.add_middleware(
 
 #MED_DATABASE = load_csv_db("med_db.csv")
 
+@app.get("/")
+async def root():
+    return {"status": "online", "message": "MedScan API is running"}
+
 @app.post("/analyse-receipt")
 async def analyse_receipt(file: UploadFile = File(...)):
 
