@@ -1,21 +1,32 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
 import os
+import json
+import firebase_admin
+from firebase_admin import credentials, firestore
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize Firebase using YOUR FRIEND'S key
-# Make sure the filename matches what you saved it as!
-firebase_cred = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
+# Get the JSON string from the environment
+cred_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
 
-# Prevent crashing if the app reloads during development
-if not firebase_admin._apps:
-    firebase_admin.initialize_app(firebase_cred)
-
-# Connect to your friend's Database
-db = firestore.client()
+if not cred_json:
+    print("❌ ERROR: FIREBASE_SERVICE_ACCOUNT_JSON is missing from Render Environment Variables!")
+else:
+    try:
+        # Some platforms add extra escaped characters; this cleans them up
+        if cred_json.startswith("'") or cred_json.startswith('"'):
+            cred_json = cred_json[1:-1]
+            
+        cred_dict = json.loads(cred_json)
+        firebase_cred = credentials.Certificate(cred_dict)
+        
+        if not firebase_admin._apps:
+            firebase_admin.initialize_app(firebase_cred)
+        
+        db = firestore.client()
+        print("✅ Firebase initialized successfully on Render!")
+    except Exception as e:
+        print(f"❌ ERROR: Failed to parse Firebase JSON: {e}")
 
 from google import genai
 from google.genai.types import HttpOptions, Part
