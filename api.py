@@ -73,7 +73,7 @@ async def analyse_receipt(file: UploadFile = File(...)):
         image = Image.open(temp_filename)
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-flash",
             contents=[
                 """
                 You are an expert medical billing assistant operating in Malaysia. 
