@@ -65,8 +65,8 @@ MedScan’s architecture is designed to handle unpredictable scaling and secure 
 * **Perceived Performance Routing:** Sequenced skeleton loaders mask the AI's processing time, ensuring the app feels instantaneous and keeps the user engaged during the OCR extraction phase.
 * **Frictionless Onboarding:** Utilizes Firebase Anonymous Authentication to transition users from awareness to action without the friction of a sign-up wall.
 
-### 2. The Backend (FastAPI on Google Cloud Run)
-* **The "Super-Extractor" API:** A Python-based FastAPI service deployed on Cloud Run. It handles heavy data extraction and offloads geographic math from the client side. 
+### 2. The Backend (FastAPI on Render)
+* **The "Super-Extractor" API:** A Python-based FastAPI service deployed on Render. It handles heavy data extraction and offloads geographic math from the client side. 
 * **Server-Side Geolocation:** To prevent UI fallback errors, the backend chains the Google Places API with the Distance Matrix API entirely server-side, serving clean, flattened data to the frontend to locate pharmacies within a 5km radius.
 * **The Hallucination Guardrail:** Acts as a deterministic layer that executes the fuzzy price audit. It strictly executes mathematical cross-referencing against the official database before presenting any financial data to the user.
 
@@ -110,7 +110,8 @@ Want to test MedScan right now without setting up a local environment? We have d
 ### How to test the AI Extraction:
 Since you might not have a Malaysian hospital bill handy, we have provided three test receipts in the `/docs/samples/` folder. They highlight exactly how our Gemini 2.5 Flash integration decodes complex medical jargon.
 
-1. **Download a Test Receipt:** * [Sample A: High-Cost Chronic Meds (OFEV & Salofalk)](/docs/samples/bill_round10_316.jpg) - *Tests the AI's ability to extract high-value specialty drugs.*
+1. **Download a Test Receipt:**
+   * [Sample A: High-Cost Chronic Meds (OFEV & Salofalk)](/docs/samples/bill_round10_316.jpg) - *Tests the AI's ability to extract high-value specialty drugs.*
    * [Sample B: Cryptic Abbreviations & OTCs](/docs/samples/bill_round10_430.jpg) - *Tests the AI's translation rules (e.g., mapping "Panadol Soluble").*
    * [Sample C: Mixed Billing (Pantai Hospital)](/docs/samples/bill_round10_988.jpg) - *Tests data extraction across different hospital formatting and "Actifast" abbreviations.*
 2. **Upload to MedScan:** Click "Scan Bill" on our web app and upload the downloaded image.
@@ -183,7 +184,7 @@ npm install --legacy-peer-deps
 2. Add your Firebase Client credentials, Maps Key, and API URL:
 ```env
 # Point to the local Python server
-NEXT_PUBLIC_API_URL="[http://127.0.0.1:8000](http://127.0.0.1:8000)"
+NEXT_PUBLIC_API_URL="http://127.0.0.1:8000"
 
 # Google Maps API Key (For the client-side map rendering)
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
