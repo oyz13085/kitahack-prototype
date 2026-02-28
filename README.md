@@ -167,7 +167,7 @@ MedScan requires a few API keys to function locally.
    FIREBASE_CREDENTIALS_PATH="./path-to-your-firebase-adminsdk.json"
 ```
 
-###Step 3: Run the FastAPI Backend
+### Step 3: Run the FastAPI Backend
 With your virtual environment active and your .env configured, start the backend server:
 
 ```bash
@@ -175,7 +175,7 @@ With your virtual environment active and your .env configured, start the backend
 python uvicorn api:app --reload
 ```
 
-###Step 4: Frontend Setup (Next.js)
+### Step 4: Frontend Setup (Next.js)
 Now, open a new terminal window (leave the backend running in the first one) to set up the Next.js client.
 
 ```bash
@@ -186,7 +186,7 @@ cd frontend
 npm install --legacy-peer-deps
 ```
 
-###Step 5: Configure Frontend Environment Variables
+### Step 5: Configure Frontend Environment Variables
 Just like the backend, the frontend needs to know how to connect to your Firebase project and Google Maps.
 
 1. Inside the frontend folder, create a file named .env.local.
@@ -205,14 +205,14 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your_sender_id"
 NEXT_PUBLIC_FIREBASE_APP_ID="your_app_id"
 ```
 
-###Step 6: Run the Frontend Development Server
+### Step 6: Run the Frontend Development Server
 Finally, boot up the Next.js application:
 
 ```bash
 npm run dev
 ```
 
-###🎉 You're Live!
+### 🎉 You're Live!
 Open your browser and navigate to http://localhost:3000. You should see the MedScan landing page. Try uploading a sample receipt to watch the local Next.js frontend communicate with your local Python FastAPI backend
 
 ---
@@ -221,8 +221,3 @@ Open your browser and navigate to http://localhost:3000. You should see the MedS
 This project was built specifically for the Google Developer Group KitaHack 2026. At this time, it is a closed-source prototype for hackathon judging purposes.
 
 If you are an insurance provider, healthcare regulator, or open-source contributor interested in the B2B API development of MedScan, please reach out to Team W Gaming via our Devpost submission.
-
----
-
-
-Built with 💻 and ☕ by Team W Gaming.
