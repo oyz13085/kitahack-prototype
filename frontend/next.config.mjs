@@ -6,6 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // This helps Vercel's internal routing for monorepos
+  distDir: '.next',
 }
 
-export default nextConfig
+export default nextConfig;
