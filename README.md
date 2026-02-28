@@ -16,8 +16,10 @@
 
 > **Submission for Google Developer Group KitaHack 2026**
 >  
-> **Built by Team W Gaming (Universiti Malaya):** Ooi Yong Zhe, Lim Kai Hern, Chong Sing Kiat, and Nicholas Tan Hong Junn.
+> **Built by Team W Gaming (Universiti Malaya/Universiti Teknologi PETRONAS):** Ooi Yong Zhe, Lim Kai Hern, Chong Sing Kiat, and Nicholas Tan Hong Junn.
 >
+> **Live Link:** https://kitahack-prototype.vercel.app/?_vercel_share=7ooFPwTJy2PsZTODWJWtkHDEHsjYiAeL
+> 
 > **🎥 Demo Video:** [Insert YouTube Link Here]
 
 ## 🚨 The Problem: A Free-Market Failure in Healthcare
